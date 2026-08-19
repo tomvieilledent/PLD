@@ -8,6 +8,4 @@ RUN chmod +x /usr/local/bin/delayed-entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/delayed-entrypoint.sh"]
 
-EXPOSE 5432
-
 CMD ["postgres"]
