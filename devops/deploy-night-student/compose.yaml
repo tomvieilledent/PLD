@@ -1,0 +1,64 @@
+name: deploy-night
+
+# STARTER COMPOSE
+# Le but n'est pas de repartir d'une page blanche : la structure et les variables de l'application
+# sont fournies. Votre travail est de comprendre ce qui est branche, de completer vos images,
+# puis de faire evoluer cette stack quand les incidents l'exigeront.
+
+services:
+  gateway:
+    image: nginx:1.27-alpine
+    ports:
+      - "${GATEWAY_PORT:-8080}:80"
+    volumes:
+      - ./runtime/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./runtime:/srv/deploy-night-runtime:ro
+    depends_on:
+      - frontend
+      - api
+
+  frontend:
+    build: ./frontend
+
+  api:
+    build: ./api
+    environment:
+      PORT: 3000
+      DB_HOST: ${DB_HOST_OVERRIDE:-db}
+      DB_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-gamenight}
+      POSTGRES_USER: ${POSTGRES_USER:-gamenight}
+      POSTGRES_PASSWORD: ${API_DB_PASSWORD:-gamenight_dev}
+      REDIS_HOST: ${REDIS_HOST_OVERRIDE:-cache}
+      REDIS_PORT: 6379
+    # Ce port hote est volontairement publie : il servira aussi pendant la simulation d'incident.
+    ports:
+      - "${API_HOST_PORT:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_started
+      cache:
+        condition: service_healthy
+
+  db:
+    build: ./db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-gamenight}
+      POSTGRES_USER: ${POSTGRES_USER:-gamenight}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gamenight_dev}
+      DB_START_DELAY: ${DB_START_DELAY:-0}
+    volumes:
+      - game-night-db:/var/lib/postgresql/data
+    # Pas de healthcheck au depart. Vous aurez peut-etre une bonne raison d'en ajouter un plus tard.
+
+  cache:
+    image: redis:7-alpine
+    # Cet exemple est fourni. Observez-le : vous pourrez reutiliser le raisonnement plus tard.
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 2s
+      retries: 10
+
+volumes:
+  game-night-db:

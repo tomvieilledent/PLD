@@ -1,0 +1,9 @@
+release,merged_at,deployed_at,result,restored_minutes
+r-101,09:02,09:18,success,0
+r-102,10:11,10:34,success,0
+r-103,11:20,11:41,incident,12
+r-104,13:04,13:18,success,0
+r-105,14:26,14:47,success,0
+r-106,15:10,15:35,incident,18
+r-107,16:12,16:26,success,0
+r-108,17:03,17:23,success,0

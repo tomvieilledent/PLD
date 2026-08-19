@@ -1,0 +1,24 @@
+#!/bin/sh
+set -eu
+ROOT="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
+ARCH="$(uname -m)"
+case "$ARCH" in
+  x86_64|amd64) ARCH=amd64 ;;
+  arm64|aarch64) ARCH=arm64 ;;
+  *) echo "Architecture non supportee: $ARCH"; exit 1 ;;
+esac
+case "$OS" in
+  linux|darwin) ;;
+  *) echo "OS non supporte par ce launcher: $OS"; exit 1 ;;
+esac
+BIN="$ROOT/.incident-bin/incident-${OS}-${ARCH}"
+[ -f "$BIN" ] || { echo "Binaire incident introuvable: $BIN"; exit 1; }
+chmod +x "$BIN" 2>/dev/null || true
+# Les binaires du kit sont compiles localement et non signes. Sur macOS,
+# Gatekeeper peut heriter de la quarantaine du ZIP telecharge. Le launcher
+# retire uniquement cet attribut du binaire local du kit avant execution.
+if [ "$OS" = "darwin" ] && command -v xattr >/dev/null 2>&1; then
+  xattr -d com.apple.quarantine "$BIN" 2>/dev/null || true
+fi
+exec "$BIN" "$@"

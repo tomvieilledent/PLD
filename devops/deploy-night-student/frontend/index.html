@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Night - Ops Console</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">G</div>
+        <div>
+          <strong>GAME NIGHT</strong>
+          <span>Ops Console</span>
+        </div>
+      </div>
+      <div class="release-chip"><span class="pulse"></span> Release Night · 20:00</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">DEPLOY NIGHT / MISSION ACTIVE</p>
+          <h1>La plateforme doit être prête avant l'ouverture.</h1>
+          <p>Vous êtes l'équipe DevOps de garde. Construisez la stack, gardez-la en ligne et survivez aux incidents.</p>
+        </div>
+        <div class="countdown-card">
+          <span>OUVERTURE JOUEURS</span>
+          <strong id="countdown">00:42:18</strong>
+          <small>Simulation pédagogique</small>
+        </div>
+      </section>
+
+      <section class="status-grid" id="statusGrid">
+        <article class="status-card"><div class="status-icon">WEB</div><div><span>Frontend</span><strong id="frontStatus">ONLINE</strong></div><i class="dot online"></i></article>
+        <article class="status-card"><div class="status-icon">API</div><div><span>API</span><strong id="apiStatus">CHECKING</strong></div><i class="dot pending" id="apiDot"></i></article>
+        <article class="status-card"><div class="status-icon">DB</div><div><span>Database</span><strong id="dbStatus">CHECKING</strong></div><i class="dot pending" id="dbDot"></i></article>
+        <article class="status-card"><div class="status-icon">RDS</div><div><span>Cache Redis</span><strong id="cacheStatus">CHECKING</strong></div><i class="dot pending" id="cacheDot"></i></article>
+      </section>
+
+      <section class="content-grid">
+        <div class="games-panel panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">CATALOGUE LIVE</p>
+              <h2>Jeux disponibles</h2>
+            </div>
+            <div class="counter"><strong id="gameCount">--</strong><span>titres</span></div>
+          </div>
+          <div class="games-grid" id="gamesGrid">
+            <div class="loading">Connexion à l'API...</div>
+          </div>
+        </div>
+
+        <aside class="ops-panel panel">
+          <div class="panel-heading compact"><div><p class="eyebrow">SANTÉ SYSTÈME</p><h2>Observabilité</h2></div></div>
+          <div class="metric"><span>API latency</span><strong id="latency">-- ms</strong></div>
+          <div class="metric"><span>DB connection</span><strong id="dbConnection">--</strong></div>
+          <div class="metric"><span>Cache</span><strong id="cacheConnection">--</strong></div>
+          <div class="metric"><span>Data source</span><strong id="dataSource">--</strong></div>
+          <div class="incident-box" id="incidentBox">
+            <div class="incident-head"><span class="incident-led"></span><strong>Aucun incident actif</strong></div>
+            <p>Le système est stable. Gardez un œil sur les logs.</p>
+          </div>
+          <div class="terminal">
+            <div class="terminal-bar"><span></span><span></span><span></span><b>ops@game-night</b></div>
+            <code id="terminalText">$ docker compose ps\nTous les services sont attendus.</code>
+          </div>
+        </aside>
+      </section>
+    </main>
+    <footer>PIXELFORGE · GAME NIGHT · TRAINING ENVIRONMENT</footer>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
