@@ -8,6 +8,9 @@ jobs:
   lint:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: TP-mission-control-PLD
     steps:
       - name: checkout code
         uses: actions/checkout@v4
@@ -16,6 +19,7 @@ jobs:
         with:
           node-version: 20.x
           cache: npm
+          cache-dependency-path: TP-mission-control-PLD/package-lock.json
       - name: install dependencies
         run: npm ci
       - name: run linter
