@@ -23,8 +23,8 @@
 - Healthcheck command used:
 
 - **Baseline running user:** root
-- **Final running user:** user
-- **What changed and why:** Modify root to user -> 
+- **Final running user:** app
+- **What changed and why:** Modify root to app -> Pas de droits root pour l'utilisateur app pour eviter les bétises
 
 ## Gate 03 - Continuous Integration
 
