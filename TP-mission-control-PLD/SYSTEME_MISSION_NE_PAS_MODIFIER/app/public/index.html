@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#05080d" />
+    <title>Orbiter-7 Flight Operations</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="crt-grid" aria-hidden="true"></div>
+    <div class="scanline" aria-hidden="true"></div>
+
+    <header class="ops-header">
+      <div class="mission-id">
+        <div class="patch" aria-hidden="true"><span>O7</span><small>FLIGHT</small></div>
+        <div>
+          <p class="kicker">ORBITER-7 // FLIGHT OPERATIONS</p>
+          <h1>MISSION CONTROL CONSOLE</h1>
+        </div>
+      </div>
+
+      <div class="header-readouts">
+        <div class="readout"><span>UTC</span><strong id="utcClock">--:--:--</strong></div>
+        <div class="readout"><span>LAUNCH WINDOW</span><strong id="countdown">T-03:00:00</strong></div>
+        <div class="mission-state" id="missionState"><i></i><span>GROUND HOLD</span></div>
+      </div>
+    </header>
+
+    <main class="ops-layout">
+      <section class="vehicle-column console-block">
+        <header class="block-header"><span>SYS-01</span><strong>VEHICLE / BUILD</strong></header>
+
+        <div class="build-identity">
+          <span class="label">VEHICLE</span>
+          <strong id="vehicle">AURORA</strong>
+          <small id="missionName">ORBITER-7</small>
+        </div>
+
+        <dl class="metric-stack">
+          <div><dt>IMAGE MASS</dt><dd id="imageSize">-- MB</dd><small id="imageDelta">BASELINE REQUIRED</small></div>
+          <div><dt>BUILD TIME</dt><dd id="buildTime">-- s</dd><small>LAST MEASURED BUILD</small></div>
+          <div><dt>RUNTIME USER</dt><dd id="runtimeUid">--</dd><small id="uidNote">NON INSPECTÉ</small></div>
+          <div><dt>HEALTH</dt><dd id="healthStatus">UNKNOWN</dd><small id="healthNote">NO SIGNAL</small></div>
+          <div><dt>MODE</dt><dd id="missionMode">SIMULATION</dd><small>ACTIVE TEST PROFILE</small></div>
+          <div><dt>BUILD SHA</dt><dd id="buildSha">LOCAL</dd><small>TRACEABILITY</small></div>
+        </dl>
+
+        <div class="subsystem-board" id="systems"></div>
+      </section>
+
+      <section class="center-column">
+        <article class="orbit-console console-block">
+          <header class="block-header"><span>NAV-07</span><strong>ORBITAL TRACQUITTER / LEO</strong><em>LIVE</em></header>
+          <div class="orbit-stage">
+            <div class="star-layer"></div>
+            <svg viewBox="0 0 740 430" class="orbit-map" role="img" aria-label="Trajectoire orbitale de la mission Orbiter-7">
+              <defs>
+                <radialGradient id="earthFill" cx="35%" cy="28%">
+                  <stop offset="0%" stop-color="#87b7cf" />
+                  <stop offset="44%" stop-color="#1d5d7a" />
+                  <stop offset="78%" stop-color="#0a2839" />
+                  <stop offset="100%" stop-color="#041018" />
+                </radialGradient>
+                <filter id="earthGlow"><feGaussianBlur stdDeviation="10" result="blur" /><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <filter id="shipGlow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <ellipse cx="370" cy="225" rx="284" ry="105" fill="none" stroke="#2d6179" stroke-width="1" stroke-dasharray="4 8" opacity=".65" class="orbit-line orbit-line-a" />
+              <ellipse cx="370" cy="225" rx="236" ry="154" fill="none" stroke="#214452" stroke-width="1" stroke-dasharray="4 8" opacity=".45" class="orbit-line orbit-line-b" transform="rotate(-19 370 225)" />
+              <circle cx="370" cy="225" r="92" fill="url(#earthFill)" filter="url(#earthGlow)" class="earth" />
+              <path d="M333 182c18-23 50-31 78-18 13 6 25 15 34 27-10 4-20 7-30 8-10-11-22-18-36-20-18-3-33 1-46 10zM324 240c14 21 40 35 68 35 22 0 43-8 58-22-12-5-23-7-35-7-20 11-44 12-65 3-9-4-18-9-26-15z" fill="#2e7b73" opacity=".7" />
+              <circle cx="575" cy="148" r="5" class="orbiter-point" filter="url(#shipGlow)" />
+              <path d="M566 143 580 148 566 153 570 148z" class="orbiter-ship" />
+              <line x1="575" y1="148" x2="655" y2="108" class="vector-line" />
+              <text x="659" y="104" class="svg-label" fill="#d7e5eb">ORBITER-7</text>
+              <text x="659" y="119" class="svg-small" fill="#8297a4">ALT 408 KM</text>
+              <line x1="295" y1="310" x2="221" y2="344" class="vector-line muted" />
+              <text x="127" y="352" class="svg-label muted" fill="#58717f">GROUND TRACQUITTER</text>
+            </svg>
+
+            <div class="orbit-data orbit-data-left">
+              <span>ALT</span><strong>408.2 KM</strong>
+              <span>VELOCITY</span><strong>7.66 KM/S</strong>
+              <span>INCLINATION</span><strong>51.64°</strong>
+            </div>
+            <div class="orbit-data orbit-data-right">
+              <span>GROUND</span><strong>LOCKED</strong>
+              <span>COMMS</span><strong>NOMINAL</strong>
+              <span>PASS</span><strong>#017</strong>
+            </div>
+          </div>
+
+          <div class="directive" id="directive">
+            <span class="directive-code">DIRECTIVE 00</span>
+            <div><strong>BASELINE REQUIRED</strong><p>Mesurez le système avant toute optimisation.</p></div>
+            <button id="hintButton" type="button">DEMANDER UN INDICE</button>
+          </div>
+        </article>
+
+        <article class="event-console console-block">
+          <header class="block-header"><span>COM-02</span><strong>LIVE MISSION LOOP</strong><em id="eventCount">0 EVENTS</em></header>
+          <div class="event-log" id="eventLog" aria-live="polite"></div>
+        </article>
+      </section>
+
+      <aside class="release-column console-block">
+        <header class="block-header"><span>FLIGHT</span><strong>RELEASE CONTROL</strong></header>
+        <div class="clearance-score">
+          <span>FLIGHT READINESS</span>
+          <strong id="clearanceScore">0/6</strong>
+          <small id="clearanceText">NO GATES CLEARED</small>
+          <div class="status-legend" aria-label="Légende des statuts">
+            <span class="legend cleared"><i></i>CLEARED</span>
+            <span class="legend warning"><i></i>CHECK</span>
+            <span class="legend nogo"><i></i>NO GO</span>
+          </div>
+        </div>
+
+        <div class="gate-board" id="gateBoard"></div>
+
+        <div class="uplink">
+          <p class="section-caption">CI / UPLINK</p>
+          <div class="uplink-row"><span>WORKFLOW</span><strong id="ciWorkflow">UNKNOWN</strong></div>
+          <div class="uplink-row"><span>MATRIX</span><strong id="matrixState">0 / 5</strong></div>
+          <div class="uplink-row"><span>SECURITY</span><strong id="securityState">LOCKED</strong></div>
+          <div class="uplink-row"><span>REGISTRY</span><strong id="registryState">LOCKED</strong></div>
+          <div class="uplink-row"><span>BRANCH</span><strong id="branchName">LOCAL</strong></div>
+        </div>
+
+        <div class="quick-command">
+          <span>CHECK ACTUEL</span>
+          <code id="currentCommand">npm run mission -- status</code>
+          <button type="button" id="copyCommand">COPIER</button>
+        </div>
+      </aside>
+    </main>
+
+    <section class="deep-space-console" id="deepSpaceSection" data-unlocked="false">
+      <header class="deep-space-header">
+        <div>
+          <span>OPTIONAL // POST-LAUNCH</span>
+          <strong>DEEP SPACE MODE</strong>
+          <small id="deepSpaceState">LOCKED UNTIL FLIGHT READINESS 6/6</small>
+        </div>
+        <div class="deep-space-score"><span>CLEARANCE</span><strong id="deepSpaceScore">0/6</strong></div>
+      </header>
+      <div class="deep-space-lock" id="deepSpaceLock">
+        <span>DEEP SPACE CHANNEL LOCKED</span>
+        <strong>OBTENEZ D'ABORD LES 6 GATES PRINCIPALES</strong>
+        <p>Quand Orbiter-7 passe GO FOR LAUNCH, X1 se déverrouille automatiquement. Les incidents suivants s'ouvrent un par un.</p>
+      </div>
+      <div class="deep-space-board" id="deepSpaceBoard"></div>
+      <footer class="deep-space-footer">
+        <span>POUR DÉMARRER L'INCIDENT DISPONIBLE</span>
+        <code id="deepStartCommand">npm run incident -- X1</code>
+        <span>PUIS VALIDEZ AVEC</span>
+        <code id="deepCheckCommand">npm run mission -- check X1</code>
+      </footer>
+    </section>
+
+    <div class="master-alarm" id="masterAlarm" hidden>
+      <div class="alarm-light"></div>
+      <div><span>ALARME PRINCIPALE</span><strong id="alarmTitle">ANOMALIE DÉTECTÉE</strong><p id="alarmMessage"></p></div>
+      <button id="dismissAlarm" type="button">ACQUITTER</button>
+    </div>
+
+    <dialog id="hintDialog" class="hint-dialog">
+      <div class="dialog-top"><span>ASSISTANCE MISSION</span><button id="closeHint" type="button">×</button></div>
+      <p class="hint-level" id="hintLevel">INDICE 1</p>
+      <h2 id="hintTitle">Observation</h2>
+      <p id="hintText"></p>
+      <div class="dialog-actions"><button id="nextHint" type="button">INDICE SUIVANT</button><button id="closeHintBottom" type="button">RETOUR CONSOLE</button></div>
+    </dialog>
+
+    <footer class="ops-footer">
+      <span>TRAINING ENVIRONMENT // ORBITER-7</span>
+      <span>DOCKER • CI/CD • DEVSECOPS • GHCR</span>
+      <span id="linkState">DATA LINK NOMINAL</span>
+    </footer>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

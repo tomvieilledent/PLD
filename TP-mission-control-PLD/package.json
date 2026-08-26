@@ -1,0 +1,21 @@
+{
+  "name": "orbiter-7-mission-control",
+  "version": "1.4.0",
+  "private": true,
+  "description": "Mission Control - PLD Docker et GitHub Actions (macOS, Windows, Linux)",
+  "main": "SYSTEME_MISSION_NE_PAS_MODIFIER/app/server.js",
+  "scripts": {
+    "start": "node SYSTEME_MISSION_NE_PAS_MODIFIER/app/server.js",
+    "doctor": "node SYSTEME_MISSION_NE_PAS_MODIFIER/scripts/doctor.mjs",
+    "lint": "node SYSTEME_MISSION_NE_PAS_MODIFIER/scripts/lint.mjs",
+    "test": "node --test",
+    "check": "npm run lint && npm test",
+    "mission": "node SYSTEME_MISSION_NE_PAS_MODIFIER/scripts/mission-cli.mjs",
+    "measure": "node SYSTEME_MISSION_NE_PAS_MODIFIER/scripts/measure.mjs",
+    "compare": "node SYSTEME_MISSION_NE_PAS_MODIFIER/scripts/mission-cli.mjs check mass",
+    "incident": "node SYSTEME_MISSION_NE_PAS_MODIFIER/scripts/incident-cli.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
