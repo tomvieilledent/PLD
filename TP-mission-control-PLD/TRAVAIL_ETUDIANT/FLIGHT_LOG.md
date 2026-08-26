@@ -10,9 +10,9 @@
 
 | Metric | Baseline | Final | Improvement |
 |---|---:|---:|---:|
-| Image size | 380.4MB |  |  |
-| Full build time | 3.3s |  |  |
-| Code-only rebuild time | *s |  |  |
+| Image size | 380.4MB | 47.2MB | -333.2MB |
+| Full build time | 3.3s | 0.9 | -2.4 |
+| Code-only rebuild time |  |  |  |
 
 - Baseline running user:
 - Final running user:
