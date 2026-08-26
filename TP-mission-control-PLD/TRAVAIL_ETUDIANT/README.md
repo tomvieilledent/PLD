@@ -14,5 +14,5 @@ Vous travaillerez aussi dans `.github/workflows/` pour la CI.
 Le dossier `SYSTEME_MISSION_NE_PAS_MODIFIER/` peut être **lu**, mais ne doit pas être modifié.
 
 
-Le workflow GitHub attendu par les checks locaux doit être créé exactement ici : `.github/workflows/mission.yml`.
+Le workflow GitHub attendu par les checks locaux doit être créé exactement ici : `.github/workflows/mission.yml`. 
  
