@@ -1,1 +1,77 @@
-{}
+{
+  "FC-101": {
+    "status": "CLEARED",
+    "checkedAt": "2026-09-02T13:52:53.259Z",
+    "attempts": 0
+  },
+  "FC-102": {
+    "status": "CLEARED",
+    "checkedAt": "2026-09-02T13:52:53.260Z",
+    "attempts": 0
+  },
+  "FC-103": {
+    "status": "CLEARED",
+    "checkedAt": "2026-09-02T13:52:53.260Z",
+    "attempts": 0
+  },
+  "FC-104": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.260Z",
+    "attempts": 0
+  },
+  "FC-105": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.261Z",
+    "attempts": 0
+  },
+  "FC-106": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.261Z",
+    "attempts": 0
+  },
+  "FC-107": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.261Z",
+    "attempts": 0
+  },
+  "FC-108": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.290Z",
+    "attempts": 0
+  },
+  "FC-X01": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.290Z",
+    "attempts": 0
+  },
+  "FC-X02": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.291Z",
+    "attempts": 0
+  },
+  "FC-X03": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.291Z",
+    "attempts": 0
+  },
+  "FC-X04": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.291Z",
+    "attempts": 0
+  },
+  "FC-X05": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.291Z",
+    "attempts": 0
+  },
+  "FC-X06": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.295Z",
+    "attempts": 0
+  },
+  "FC-X07": {
+    "status": "OPEN",
+    "checkedAt": "2026-09-02T13:52:53.295Z",
+    "attempts": 0
+  }
+}

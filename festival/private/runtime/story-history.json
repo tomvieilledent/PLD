@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "ts": "2026-09-02T13:52:53.295Z",
+    "type": "VALIDATION",
+    "id": null,
+    "message": "Validation globale : 3/15 · 3/8 obligatoires"
+  }
+]

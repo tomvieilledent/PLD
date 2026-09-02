@@ -17,6 +17,11 @@ function scheduleShow(state, show) {
   if (!shape.ok) return shape;
   if (!state.artists.some(a => a.id === show.artistId)) return { ok:false, code:'ARTIST_NOT_FOUND' };
   if (!state.stages.some(s => s.id === show.stageId)) return { ok:false, code:'STAGE_NOT_FOUND' };
+  if (state.shows.some(Sh => Sh.stageId === show.stageId && overlaps(Sh.start, Sh.end, show.start, show.end)))
+    return { ok:false, code:'STAGE_CONFLICT' };
+  if (state.shows.some(Sh => Sh.artistId === show.artistId && overlaps(Sh.start, Sh.end, show.start, show.end)))
+    return { ok:false, code:'ARTIST_CONFLICT' };
+
 
   state.shows.push({ ...show, status: show.status || 'SCHEDULED' });
   return { ok:true, show };

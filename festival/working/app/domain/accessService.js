@@ -7,6 +7,8 @@ function checkAccess(state, wristbandId, zoneId, now = new Date('2026-09-02T17:0
   if (!wristband || !wristband.active) return { allowed:false, code:'WRISTBAND_INVALID' };
   const ticket = getTicket(state, wristband.ticketId);
   if (!ticket) return { allowed:false, code:'TICKET_NOT_FOUND' };
+  if (ticket.status === 'CANCELLED')
+    return { allowed:false, code:'TICKET_INACTIVE' };
   const zone = getZone(state, zoneId);
   if (!zone) return { allowed:false, code:'ZONE_NOT_FOUND' };
 
