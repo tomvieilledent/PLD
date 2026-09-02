@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: Holbies Festival Control API
+  version: 1.0.0
+paths:
+  /api/shows:
+    post:
+      summary: Programmer un show
+      responses:
+        '201': { description: Show créé }
+        '400': { description: Payload invalide }
+        '409': { description: Conflit de scène ou d'artiste }
+  /api/access/check:
+    post:
+      summary: Vérifier un droit d'accès
+      responses:
+        '200': { description: Accès autorisé }
+        '403': { description: Accès refusé }
+  /api/wristbands:
+    post:
+      summary: Émettre un bracelet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WristbandPayload'
+      responses:
+        '201': { description: Bracelet créé }
+        '400': { description: Payload invalide }
+  /api/artists/{artistId}:
+    get:
+      summary: Lire un artiste
+      responses:
+        '200':
+          description: Artiste trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+components:
+  schemas:
+    Artist:
+      type: object
+      required: [artistId, name, genre]
+      additionalProperties: false
+      properties:
+        artistId: { type: string }
+        name: { type: string }
+        genre: { type: string }
+    WristbandPayload:
+      type: object
+      required: [id, ticketId, level]
+      additionalProperties: false
+      properties:
+        id: { type: string, pattern: '^WB-[0-9]{3,}$' }
+        ticketId: { type: string, pattern: '^TK-[0-9]{3,}$' }
+        level:
+          type: string
+          enum: [STANDARD, VIP, CREW, ARTIST]

@@ -1,0 +1,9 @@
+stateDiagram-v2
+    [*] --> ACTIVE : ticket_issued
+    ACTIVE --> CANCELLED : cancel
+    ACTIVE --> EXPIRED : valid_until_reached
+    ACTIVE --> REFUNDED : refund
+    CANCELLED --> REFUNDED : refund
+    EXPIRED --> [*]
+    REFUNDED --> [*]
+    CANCELLED --> [*]

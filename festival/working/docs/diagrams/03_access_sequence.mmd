@@ -1,0 +1,22 @@
+sequenceDiagram
+    actor Agent as Agent de contrôle
+    participant UI as Festival Control
+    participant API as Access API
+    participant Access as AccessService
+    participant Ticket as Ticket Data
+    participant Zone as Zone Data
+
+    Agent->>UI: scanne un bracelet
+    UI->>API: POST /api/access/check
+    API->>Access: checkAccess(wristbandId, zoneId)
+    Access->>Ticket: vérifier bracelet + ticket actif + validité
+    Ticket-->>Access: identité et droits
+    Access->>Zone: vérifier niveau requis + capacité
+    Zone-->>Access: règles et occupation
+    alt Accès autorisé
+      Access-->>API: ACCESS_GRANTED
+      API-->>UI: 200
+    else Accès refusé
+      Access-->>API: motif métier
+      API-->>UI: 403
+    end

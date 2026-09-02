@@ -1,0 +1,31 @@
+classDiagram
+    class FestivalService {
+      +getDashboard()
+    }
+    class ScheduleService {
+      +scheduleShow(show)
+      +rescheduleShow(id, patch)
+      +getPublicLineup()
+    }
+    class AccessService {
+      +checkAccess(wristbandId, zoneId)
+      +registerEntry()
+      +registerExit()
+      +issueWristband()
+    }
+    class StageService {
+      +transitionStage(stageId, nextStatus)
+    }
+    class FestivalState {
+      +artists
+      +shows
+      +stages
+      +zones
+      +tickets
+      +wristbands
+    }
+
+    FestivalService o-- FestivalState
+    ScheduleService --> FestivalState
+    AccessService --> FestivalState
+    StageService --> FestivalState

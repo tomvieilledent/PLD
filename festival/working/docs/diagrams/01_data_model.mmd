@@ -1,0 +1,57 @@
+erDiagram
+    ARTIST ||--o{ SHOW : "joue"
+    STAGE ||--o{ SHOW : "accueille"
+    TICKET ||--o| WRISTBAND : "active"
+    TICKET ||--|| ATTENDEE : "appartient à"
+    WRISTBAND ||--o{ ACCESS_EVENT : "génère"
+    ZONE ||--o{ ACCESS_EVENT : "journalise"
+
+    ARTIST {
+      string artistId PK
+      string name
+      string genre
+    }
+    STAGE {
+      string stageId PK
+      string name
+      string status
+      int capacity
+    }
+    SHOW {
+      string showId PK
+      string artistId FK
+      string stageId FK
+      datetime start
+      datetime end
+      string status
+    }
+    ATTENDEE {
+      string attendeeId PK
+      string name
+    }
+    TICKET {
+      string ticketId PK
+      string attendeeId FK
+      string type
+      string status
+      datetime validUntil
+    }
+    WRISTBAND {
+      string wristbandId PK
+      string ticketId FK
+      string level
+      boolean active
+    }
+    ZONE {
+      string zoneId PK
+      string name
+      int capacity
+      int occupancy
+    }
+    ACCESS_EVENT {
+      string eventId PK
+      string wristbandId FK
+      string zoneId FK
+      string type
+      datetime at
+    }

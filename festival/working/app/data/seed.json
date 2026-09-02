@@ -1,0 +1,231 @@
+{
+  "festival": {
+    "name": "Holbies Festival",
+    "edition": "2026",
+    "gates": "14:00",
+    "city": "Roubaix",
+    "maxAttendees": 25000
+  },
+  "stages": [
+    {
+      "id": "ST-MAIN",
+      "name": "Main Stage",
+      "status": "READY",
+      "capacity": 12000
+    },
+    {
+      "id": "ST-PULSE",
+      "name": "Pulse Stage",
+      "status": "READY",
+      "capacity": 8000
+    },
+    {
+      "id": "ST-CLUB",
+      "name": "Club 42",
+      "status": "EVACUATED",
+      "capacity": 3000
+    },
+    {
+      "id": "ST-LAB",
+      "name": "Lab Stage",
+      "status": "READY",
+      "capacity": 2000
+    }
+  ],
+  "zones": [
+    {
+      "id": "ZN-GENERAL",
+      "name": "General",
+      "capacity": 25000,
+      "occupancy": 14120,
+      "requiredLevels": [
+        "STANDARD",
+        "VIP",
+        "CREW",
+        "ARTIST"
+      ]
+    },
+    {
+      "id": "ZN-VIP",
+      "name": "VIP Deck",
+      "capacity": 4000,
+      "occupancy": 1320,
+      "requiredLevels": [
+        "VIP",
+        "CREW",
+        "ARTIST"
+      ]
+    },
+    {
+      "id": "ZN-BACKSTAGE",
+      "name": "Backstage",
+      "capacity": 600,
+      "occupancy": 211,
+      "requiredLevels": [
+        "CREW",
+        "ARTIST"
+      ]
+    },
+    {
+      "id": "ZN-PIT",
+      "name": "Main Pit",
+      "capacity": 5000,
+      "occupancy": 4999,
+      "requiredLevels": [
+        "STANDARD",
+        "VIP",
+        "CREW",
+        "ARTIST"
+      ]
+    }
+  ],
+  "artists": [
+    {
+      "id": "AR-001",
+      "name": "Neon Fox",
+      "genre": "Electro"
+    },
+    {
+      "id": "AR-002",
+      "name": "Syntax Error",
+      "genre": "Rock"
+    },
+    {
+      "id": "AR-003",
+      "name": "Null Pointer",
+      "genre": "Techno"
+    },
+    {
+      "id": "AR-004",
+      "name": "Les Holbies",
+      "genre": "Indie"
+    },
+    {
+      "id": "AR-005",
+      "name": "Async Waves",
+      "genre": "House"
+    },
+    {
+      "id": "AR-006",
+      "name": "Merge Conflict",
+      "genre": "Punk"
+    },
+    {
+      "id": "AR-999",
+      "name": "Unused Artist",
+      "genre": "Ambient"
+    }
+  ],
+  "shows": [
+    {
+      "id": "SH-101",
+      "artistId": "AR-001",
+      "stageId": "ST-MAIN",
+      "start": "2026-09-02T18:00:00+02:00",
+      "end": "2026-09-02T19:00:00+02:00",
+      "status": "SCHEDULED"
+    },
+    {
+      "id": "SH-102",
+      "artistId": "AR-002",
+      "stageId": "ST-MAIN",
+      "start": "2026-09-02T18:30:00+02:00",
+      "end": "2026-09-02T19:30:00+02:00",
+      "status": "SCHEDULED"
+    },
+    {
+      "id": "SH-103",
+      "artistId": "AR-001",
+      "stageId": "ST-PULSE",
+      "start": "2026-09-02T18:45:00+02:00",
+      "end": "2026-09-02T19:45:00+02:00",
+      "status": "SCHEDULED"
+    },
+    {
+      "id": "SH-104",
+      "artistId": "AR-003",
+      "stageId": "ST-CLUB",
+      "start": "2026-09-02T20:00:00+02:00",
+      "end": "2026-09-02T21:00:00+02:00",
+      "status": "SCHEDULED"
+    },
+    {
+      "id": "SH-105",
+      "artistId": "AR-004",
+      "stageId": "ST-LAB",
+      "start": "2026-09-02T21:00:00+02:00",
+      "end": "2026-09-02T22:00:00+02:00",
+      "status": "CANCELLED"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "TK-001",
+      "owner": "Alice",
+      "type": "STANDARD",
+      "status": "ACTIVE",
+      "validUntil": "2026-09-04T02:00:00+02:00"
+    },
+    {
+      "id": "TK-002",
+      "owner": "Bob",
+      "type": "VIP",
+      "status": "CANCELLED",
+      "validUntil": "2026-09-04T02:00:00+02:00"
+    },
+    {
+      "id": "TK-003",
+      "owner": "Chloé",
+      "type": "VIP",
+      "status": "ACTIVE",
+      "validUntil": "2026-09-04T02:00:00+02:00"
+    },
+    {
+      "id": "TK-004",
+      "owner": "Diego",
+      "type": "STANDARD",
+      "status": "ACTIVE",
+      "validUntil": "2026-08-01T02:00:00+02:00"
+    },
+    {
+      "id": "TK-005",
+      "owner": "Eva",
+      "type": "CREW",
+      "status": "ACTIVE",
+      "validUntil": "2026-09-04T02:00:00+02:00"
+    }
+  ],
+  "wristbands": [
+    {
+      "id": "WB-001",
+      "ticketId": "TK-001",
+      "level": "STANDARD",
+      "active": true
+    },
+    {
+      "id": "WB-002",
+      "ticketId": "TK-002",
+      "level": "VIP",
+      "active": true
+    },
+    {
+      "id": "WB-003",
+      "ticketId": "TK-003",
+      "level": "VIP",
+      "active": true
+    },
+    {
+      "id": "WB-004",
+      "ticketId": "TK-004",
+      "level": "STANDARD",
+      "active": true
+    },
+    {
+      "id": "WB-005",
+      "ticketId": "TK-005",
+      "level": "CREW",
+      "active": true
+    }
+  ],
+  "accessEvents": []
+}

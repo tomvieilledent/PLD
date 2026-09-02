@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="fr" class="page-lock">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Holbies Festival</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="media/hero-crowd.jpg" as="image">
+  <link rel="preload" href="media/hero-crowd.mp4" as="video" type="video/mp4">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#view-start">Aller au contenu</a>
+  <div class="beams" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="fest-bar">
+    <div class="fest-top">
+      <div class="brand">
+        <span class="brand-mark">H</span>
+        <div>
+          <strong>Holbies</strong>
+          <small>Festival 2026 · Mathieu Morel</small>
+        </div>
+      </div>
+      <div class="fest-progress">
+        <span id="readinessText">0 / 8 obligatoires</span>
+        <div class="meter" aria-hidden="true"><div id="meterFill"></div></div>
+      </div>
+      <div class="fest-meta">
+        <div class="live-chip">
+          <span class="dot"></span>
+          <div>
+            <small id="clockLabel">Ouverture</small>
+            <strong id="clock">T-03:00</strong>
+          </div>
+        </div>
+        <div class="pass">
+          <small class="rank" id="rank">RUNNER TECH</small>
+          <p class="xp-row"><strong id="xp">0 XP</strong><span id="xpMax">/ 1850</span></p>
+          <div class="xp-meter"><div id="xpFill"></div></div>
+          <div id="badges" class="badges"><span class="empty-badge">Aucun badge</span></div>
+        </div>
+      </div>
+    </div>
+    <nav class="steps" id="steps" aria-label="Parcours">
+      <button type="button" class="step is-on" data-view="start">
+        <span>Tonight</span>
+        <small>Briefing — que faire maintenant</small>
+      </button>
+      <button type="button" class="step" data-view="observe">
+        <span>Le site</span>
+        <small>Line-up public, scènes, foule</small>
+      </button>
+      <button type="button" class="step" data-view="lab">
+        <span>Field Lab</span>
+        <small>Reproduire les bugs avant de coder</small>
+      </button>
+      <button type="button" class="step" data-view="missions">
+        <span>Incidents</span>
+        <small>La liste des bugs à corriger</small>
+      </button>
+    </nav>
+  </header>
+
+  <p class="sr-only"><span id="liveState">En briefing</span> · <span id="readiness">0%</span> ready · run <strong id="runScore">0/15</strong> · <span id="stageCount">4</span> scènes</p>
+
+  <main>
+    <section class="view is-on" id="view-start">
+      <article id="campaign" class="hero">
+        <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="media/hero-crowd.jpg">
+          <source src="media/hero-crowd.mp4" type="video/mp4">
+        </video>
+        <img class="hero-fallback" src="media/hero-crowd.jpg" alt="" fetchpriority="high">
+        <div class="hero-scrim"></div>
+        <div class="hero-copy">
+          <p class="kicker"><span id="actNumber">ACTE 1 / 4</span> · <span id="actTime">10:00</span> · <span id="campaignStatus">CAMPAGNE ACTIVE</span></p>
+          <h1 id="actTitle">SOUNDCHECK IMPOSSIBLE</h1>
+          <p class="radio-line"><span class="radio-dot"></span><strong id="radioSource">RÉGIE PROGRAMMATION</strong></p>
+          <p id="radioMessage" class="radio-message"></p>
+          <div class="objective">
+            <span>Objectif de l’acte</span>
+            <strong id="actObjective"></strong>
+          </div>
+          <button type="button" class="primary" id="nextAction">Voir le line-up</button>
+        </div>
+      </article>
+
+      <aside class="start-side">
+        <p class="role-name">Tonight</p>
+        <p class="role-why" id="startIntro">Les bugs du line-up se voient sur <b>Le site</b>. Quand tu corriges, le site se met à jour tout seul.</p>
+        <div id="currentMissions" class="mission-now"></div>
+        <div id="actTrack" class="act-track"></div>
+        <div class="journal-box">
+          <h3>Journal</h3>
+          <div id="history" class="history" aria-live="polite"></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="view" id="view-observe" hidden>
+      <div class="board-top">
+        <div>
+          <p class="role-name">Le site</p>
+          <p class="role-why" id="observeHint">Les anomalies ont un badge rouge. Quand tu corriges, les badges disparaissent.</p>
+        </div>
+        <div id="liveFlags" class="live-flags"></div>
+        <p class="next-row">
+          <button type="button" class="ghost" data-view="start">Tonight</button>
+          <button type="button" class="primary" data-view="lab">Field Lab</button>
+        </p>
+      </div>
+
+      <article class="panel lineup-panel">
+        <div class="panel-head">
+          <div>
+            <p class="kicker">LINE-UP</p>
+            <h2>Créneaux sensibles</h2>
+          </div>
+          <span class="tag warning">À vérifier</span>
+        </div>
+        <div id="lineup" class="lineup"></div>
+      </article>
+
+      <div class="board-bottom">
+        <article class="panel" id="stages-wrap">
+          <div class="panel-head">
+            <div>
+              <p class="kicker">STAGE OPS</p>
+              <h2>État des scènes</h2>
+            </div>
+            <span class="tag">Live</span>
+          </div>
+          <div id="stages" class="stage-list"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="kicker">ZONES</p>
+              <h2>Occupation du site</h2>
+            </div>
+          </div>
+          <div id="zoneBoard" class="zone-board"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="view-lab" hidden>
+      <div id="lab">
+        <div class="lab-top">
+          <div>
+            <p class="kicker">FIELD LAB</p>
+            <h1>Cinq bancs d’essai. Zéro supposition.</h1>
+            <p class="role-why" id="labIntro">Tu ne codes pas ici. Tu <b>reproduis</b> le symptôme avec la vraie logique, tu confrontes aux sources de vérité, puis tu corriges dans <code>working/</code>.</p>
+          </div>
+          <p class="lab-recipe" id="labRecipe"></p>
+          <p class="next-row">
+            <button type="button" class="ghost" data-view="observe">Le site</button>
+            <button type="button" class="primary" data-view="missions">Incidents</button>
+          </p>
+        </div>
+        <div id="labZones" class="lab-zones"></div>
+        <div class="lab-console">
+          <aside class="lab-tool-nav" aria-label="Bancs d’essai du Field Lab">
+            <p class="lab-tool-label">Bancs d’essai</p>
+            <button type="button" class="lab-tool is-on" data-lab-tool="access"><span>A</span><strong>Accès</strong><small>Acte 2 · bracelets & zones</small></button>
+            <button type="button" class="lab-tool" data-lab-tool="stage"><span>S</span><strong>Scène</strong><small>Acte 3 · machine d’état</small></button>
+            <button type="button" class="lab-tool" data-lab-tool="capacity"><span>C</span><strong>Capacité</strong><small>Acte 3 · valeurs limites</small></button>
+            <button type="button" class="lab-tool" data-lab-tool="schedule"><span>P</span><strong>Programmation</strong><small>Acte 1 · créneaux & artistes</small></button>
+            <button type="button" class="lab-tool" data-lab-tool="payload"><span>{ }</span><strong>Payload API</strong><small>Acte 4 · contrat d’entrée</small></button>
+            <div class="lab-safety"><strong>DRY RUN</strong><span>Les essais n’altèrent pas la campagne.</span></div>
+          </aside>
+
+          <div class="lab-stations">
+            <form id="accessForm" class="lab-station is-on" data-lab-station="access">
+              <div class="station-head"><div><p class="kicker">Banc A · contrôle d’accès</p><h2>Qui entre, et où ?</h2></div><span class="station-chip">ACCESS</span></div>
+              <div class="station-work">
+                <p class="station-copy">Choisis un bracelet et une zone. Le Lab exécute la vraie règle d’accès et te montre la décision brute de l’application.</p>
+                <div class="station-controls two">
+                  <label><span class="step-n">1</span> Bracelet<select id="wristband"></select></label>
+                  <label><span class="step-n">2</span> Zone<select id="zone"></select></label>
+                </div>
+                <button class="primary station-run" type="submit"><span class="step-n">3</span> Scanner le bracelet</button>
+              </div>
+              <div class="station-out">
+                <p class="verdict" id="accessVerdict">Pas encore de scan.</p>
+                <output id="accessResult" class="result">En attente d’un scan.</output>
+              </div>
+            </form>
+
+            <form id="stageForm" class="lab-station" data-lab-station="stage" hidden>
+              <div class="station-head"><div><p class="kicker">Banc S · machine d’état</p><h2>Cette transition est-elle légale ?</h2></div><span class="station-chip">FSM</span></div>
+              <div class="station-work">
+                <p class="station-copy">Tente une transition sur une copie de la scène. Compare ensuite le résultat avec le diagramme Mermaid de référence.</p>
+                <div class="station-controls two">
+                  <label><span class="step-n">1</span> Scène<select id="stageSelect"></select></label>
+                  <label><span class="step-n">2</span> Nouvel état<select id="nextStatus">
+                    <option>READY</option><option>LIVE</option><option>PAUSED</option><option>EVACUATED</option><option>CLOSED</option>
+                  </select></label>
+                </div>
+                <button class="primary station-run" type="submit"><span class="step-n">3</span> Simuler la transition</button>
+              </div>
+              <div class="station-out">
+                <p class="verdict" id="stageVerdict">Aucune transition simulée.</p>
+                <output id="stageResult" class="result">Aucune transition simulée.</output>
+              </div>
+            </form>
+
+            <form id="capacityForm" class="lab-station" data-lab-station="capacity" hidden>
+              <div class="station-head"><div><p class="kicker">Banc C · capacité</p><h2>Que se passe-t-il à la limite exacte ?</h2></div><span class="station-chip">BOUNDARY</span></div>
+              <div class="station-work">
+                <p class="station-copy">Fixe artificiellement l’occupation d’une zone puis simule l’entrée d’une personne. Parfait pour tester juste avant, exactement sur, et juste après la limite.</p>
+                <div class="station-controls three">
+                  <label><span class="step-n">1</span> Zone<select id="capacityZone"></select></label>
+                  <label><span class="step-n">2</span> Occupation simulée<input id="capacityOccupancy" type="number" min="0" step="1"></label>
+                  <label><span class="step-n">3</span> Bracelet<select id="capacityWristband"></select></label>
+                </div>
+                <div class="station-presets"><span>Raccourcis :</span><button type="button" data-capacity-preset="below">limite - 1</button><button type="button" data-capacity-preset="limit">limite exacte</button><button type="button" data-capacity-preset="above">limite + 1</button></div>
+                <button class="primary station-run" type="submit"><span class="step-n">4</span> Simuler une entrée</button>
+              </div>
+              <div class="station-out">
+                <p class="verdict" id="capacityVerdict">Aucune limite testée.</p>
+                <output id="capacityResult" class="result">Choisis une valeur et lance le test.</output>
+              </div>
+            </form>
+
+            <form id="scheduleForm" class="lab-station" data-lab-station="schedule" hidden>
+              <div class="station-head"><div><p class="kicker">Banc P · programmation</p><h2>Ce concert peut-il vraiment être ajouté ?</h2></div><span class="station-chip">SCHEDULE</span></div>
+              <div class="station-work">
+                <p class="station-copy">Programme un show fictif. Le Lab te montre les créneaux déjà occupés dans la même fenêtre puis la réponse réelle du service.</p>
+                <div class="station-controls four">
+                  <label><span class="step-n">1</span> Artiste<select id="scheduleArtist"></select></label>
+                  <label><span class="step-n">2</span> Scène<select id="scheduleStage"></select></label>
+                  <label><span class="step-n">3</span> Début<input id="scheduleStart" type="datetime-local" value="2026-09-02T18:30"></label>
+                  <label><span class="step-n">4</span> Fin<input id="scheduleEnd" type="datetime-local" value="2026-09-02T19:15"></label>
+                </div>
+                <button class="primary station-run" type="submit"><span class="step-n">5</span> Tenter la programmation</button>
+              </div>
+              <div class="station-out">
+                <p class="verdict" id="scheduleVerdict">Aucune programmation testée.</p>
+                <output id="scheduleResult" class="result">Le résultat affichera aussi les shows présents sur la même fenêtre.</output>
+              </div>
+            </form>
+
+            <form id="payloadForm" class="lab-station" data-lab-station="payload" hidden>
+              <div class="station-head"><div><p class="kicker">Banc API · payload</p><h2>Le contrat laisse-t-il passer ça ?</h2></div><span class="station-chip">JSON</span></div>
+              <div class="station-work">
+                <p class="station-copy">Envoie un payload de création de bracelet sur une copie des données. Modifie le JSON ou utilise un preset, puis confronte la réponse au contrat OpenAPI.</p>
+                <div class="payload-workbench">
+                  <label><span class="step-n">1</span> Payload JSON<textarea id="payloadJson" spellcheck="false">{
+  "id": "WB-777",
+  "ticketId": "TK-001",
+  "level": "STANDARD"
+}</textarea></label>
+                  <div class="payload-side">
+                    <div class="station-presets vertical"><span>Presets :</span><button type="button" data-payload-preset="valid">payload valide</button><button type="button" data-payload-preset="level">niveau inconnu</button><button type="button" data-payload-preset="extra">champ surprise</button></div>
+                    <button class="primary station-run" type="submit"><span class="step-n">2</span> Tester le contrat</button>
+                  </div>
+                </div>
+              </div>
+              <div class="station-out">
+                <p class="verdict" id="payloadVerdict">Aucun payload envoyé.</p>
+                <output id="payloadResult" class="result">La réponse du validateur apparaîtra ici.</output>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="tool-card terminal-card">
+          <strong>Checker</strong>
+          <code>npm run check -- FC-101</code>
+          <code>npm run hint -- FC-101 1</code>
+          <code>npm run validate</code>
+          <span class="terminal-note">private/ hors zone</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-missions" hidden>
+      <div id="incidents">
+        <div class="board-top">
+          <div>
+            <p class="kicker">INCIDENT BOARD</p>
+            <h1>Les anomalies de l’acte en cours</h1>
+            <p class="role-why section-note">Les actes futurs restent verrouillés. Les bonus s’ouvrent après les 8 obligatoires.</p>
+          </div>
+          <div class="filters">
+            <button class="filter active" data-kind="all" type="button">Tous</button>
+            <button class="filter" data-kind="mandatory" type="button">Obligatoires</button>
+            <button class="filter" data-kind="bonus" type="button">Bonus</button>
+          </div>
+          <p class="next-row">
+            <button type="button" class="ghost" data-view="start">Tonight</button>
+          </p>
+        </div>
+        <div id="incidentGrid" class="incident-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Holbies Festival · une création de <strong>Mathieu Morel</strong> · working/ · private/ ne pas toucher · npm start</footer>
+
+  <div id="gateFlash" class="gate-flash" hidden>
+    <div>
+      <small id="gateKicker">SCAN</small>
+      <strong id="gateTitle">ACCESS</strong>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

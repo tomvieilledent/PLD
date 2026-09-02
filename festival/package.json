@@ -1,0 +1,18 @@
+{
+  "name": "holbies-festival-control",
+  "version": "1.3.0",
+  "private": true,
+  "description": "PLD Holbies Festival Control - Campaign Mode + Field Lab central - audit final",
+  "scripts": {
+    "start": "node working/app/server.js",
+    "test": "node --test working/tests/*.test.js",
+    "check": "node private/checker.js check",
+    "incident": "node private/checker.js check",
+    "validate": "node private/checker.js validate",
+    "hint": "node private/checker.js hint",
+    "reset": "node private/checker.js reset"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

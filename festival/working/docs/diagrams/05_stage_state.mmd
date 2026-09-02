@@ -1,0 +1,13 @@
+stateDiagram-v2
+    [*] --> CLOSED
+    CLOSED --> READY : open_stage
+    READY --> LIVE : start_show
+    LIVE --> PAUSED : pause_show
+    PAUSED --> LIVE : resume_show
+    LIVE --> READY : end_show
+    PAUSED --> READY : stop_show
+    READY --> EVACUATED : evacuate
+    LIVE --> EVACUATED : evacuate
+    PAUSED --> EVACUATED : evacuate
+    EVACUATED --> READY : safety_clear
+    READY --> CLOSED : close_stage

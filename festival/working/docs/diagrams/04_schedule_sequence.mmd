@@ -1,0 +1,20 @@
+sequenceDiagram
+    actor Ops as Régisseur
+    participant UI as Festival Control
+    participant API as Schedule API
+    participant Service as ScheduleService
+    participant State as Festival State
+
+    Ops->>UI: propose un nouveau créneau
+    UI->>API: POST /api/shows
+    API->>Service: scheduleShow(show)
+    Service->>State: vérifier scène disponible
+    Service->>State: vérifier artiste disponible
+    alt Aucun conflit
+      Service->>State: enregistrer le show
+      Service-->>API: CREATED
+      API-->>UI: 201 Created
+    else Conflit métier
+      Service-->>API: STAGE_CONFLICT / ARTIST_CONFLICT
+      API-->>UI: 409 Conflict
+    end
